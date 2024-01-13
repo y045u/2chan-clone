@@ -1,12 +1,13 @@
 <?php
 
 $title = "y045u";
-// var_dump($title);
-// print_r($title);
-// if ($_POST[username] != "") {
-// 	$username = $_POST[username];
-// } 
-// var_dump($username);
+
+if(isset($_POST["submitButton"])) {
+	$username = $_POST["username"];
+	var_dump($username);
+	$body = $_POST["body"];
+	var_dump($body);
+} 
 
 ?>
 
@@ -44,12 +45,12 @@ $title = "y045u";
 			</section>
 			<form class="formWrapper" method="POST">
 				<div>
-					<input type="submit" value="書き込む">
+					<input type="submit" value="書き込む" name="submitButton">
 					<label for="">名前：</label>
 					<input type="text" name="username" >
 				</div>
 				<div>
-					<textarea class="commentTextArea"></textarea>
+					<textarea class="commentTextArea" name="body"></textarea>
 				</div>
 			</form>
 		</div>
