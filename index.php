@@ -1,5 +1,7 @@
 <?php
 
+include_once("./app/database/connect.php");
+
 $title = "y045u";
 
 if(isset($_POST["submitButton"])) {
