@@ -20,7 +20,8 @@ $statement->execute();
 
 $comment_array = $statement;
 
-var_dump($comment_array->fetchAll());
+// var_dump($comment_array->fetchAll());
+// var_dump($comment_array);
 
 ?>
 
@@ -45,16 +46,18 @@ var_dump($comment_array->fetchAll());
 				<h1>２ちゃんねる掲示板を作ってみた</h1>
 			</div>
 			<section>
-				<article>
-					<div class="wrapper">
-						<div class="nameArea">
-							<span>名前：</span>
-							<p class="username">名無し</p>
-							<time>：2024/01/13 5:46</time>
+				<?php foreach ($comment_array as $comment) : ?>
+					<article>
+						<div class="wrapper">
+							<div class="nameArea">
+								<span>名前：</span>
+								<p class="username"><?php echo $comment["username"] ?></p>
+								<time>：<?php echo $comment["post_date"] ?></time>
+							</div>
+							<p class="comment"><?php echo $comment["body"] ?></p>
 						</div>
-						<p class="comment">コメントはこちらです。</p>
-					</div>
-				</article>
+					</article>
+				<?php endforeach ?>
 			</section>
 			<form class="formWrapper" method="POST">
 				<div>
