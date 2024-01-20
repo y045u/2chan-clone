@@ -4,30 +4,46 @@ include_once("./app/database/connect.php");
 
 $title = "y045u";
 
+$error_message = array();
+
+
 if(isset($_POST["submitButton"])) {
 	// $username = $_POST["username"];
 	// var_dump($username);
 	// $body = $_POST["body"];
 	// var_dump($body);
 
-	$post_date = date("Y-m-d H:i:s");
+	// お名前入力チェック
+	if(empty($_POST["username"])) {
+		$error_message["username"] = "お名前を入力してください。";
+	}
+	
+	// コメント入力チェック
+	if(empty($_POST["body"])) {
+		$error_message["body"] = "コメントを入力してください。";
+	}
 
-	$sql = "INSERT INTO `comment` (`username`, `body`, `post_date`) VALUES (:username, :body, :post_date);";	
-	$statement = $pdo->prepare($sql);
+	if(empty($error_message)) {
 
-	// 値をセットする
-	$statement->bindParam(":username", $_POST["username"], PDO::PARAM_STR);
-	$statement->bindParam(":body", $_POST["body"], PDO::PARAM_STR);
-	$statement->bindParam(":post_date", $post_date, PDO::PARAM_STR);
-
-	$statement->execute();
+		$post_date = date("Y-m-d H:i:s");
+		
+		$sql = "INSERT INTO `comment` (`username`, `body`, `post_date`) VALUES (:username, :body, :post_date);";	
+		$statement = $pdo->prepare($sql);
+		
+		// 値をセットする
+		$statement->bindParam(":username", $_POST["username"], PDO::PARAM_STR);
+		$statement->bindParam(":body", $_POST["body"], PDO::PARAM_STR);
+		$statement->bindParam(":post_date", $post_date, PDO::PARAM_STR);
+		
+		$statement->execute();
+	}
 }
-
-$comment_array = array();
-
-// コメントデータをテーブルから取得してくる。
-$sql = "SELECT * FROM comment";
-$statement = $pdo->prepare($sql);
+	
+	$comment_array = array();
+	
+	// コメントデータをテーブルから取得してくる。
+	$sql = "SELECT * FROM comment";
+	$statement = $pdo->prepare($sql);
 $statement->execute();
 
 $comment_array = $statement;
