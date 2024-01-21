@@ -12,8 +12,8 @@ $thread_array = $statement;
 // var_dump($thread_array);
 
 // DB接続を切る
-$pdo = null;
-$statement = null;
+// $pdo = null;
+// $statement = null;
 
 
 ?>
