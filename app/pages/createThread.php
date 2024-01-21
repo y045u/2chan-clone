@@ -1,6 +1,7 @@
 <?php
 
 include_once("../database/connect.php");
+include_once("../functions/thread_add.php");
 
 ?>
 
